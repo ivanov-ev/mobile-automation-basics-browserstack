@@ -14,7 +14,7 @@ import java.net.URL;
 
 public class BrowserstackDriver implements WebDriverProvider {
 
-    public static BrowserstackConfig browserstackConfig = ConfigFactory.create(BrowserstackConfig.class);
+    public static BrowserstackConfig browserstackConfig = ConfigFactory.create(BrowserstackConfig.class, System.getProperties());
 
     @Nonnull
     @Override
@@ -22,35 +22,35 @@ public class BrowserstackDriver implements WebDriverProvider {
         MutableCapabilities caps = new MutableCapabilities();
 
         // Set your access credentials
-        caps.setCapability("browserstack.user", "eugeneivanov_XRVOLf");
-        //caps.setCapability("userName", browserstackConfig.browserstackUser());
-        caps.setCapability("browserstack.key", "ajdSE72TKx91caiJVBBn");
-        //caps.setCapability("accessKey", browserstackConfig.browserstackKey());
+        //caps.setCapability("browserstack.user", "eugeneivanov_XRVOLf");
+        caps.setCapability("browserstack.user", browserstackConfig.browserstackUser());
+        //caps.setCapability("browserstack.key", "ajdSE72TKx91caiJVBBn");
+        caps.setCapability("browserstack.key", browserstackConfig.browserstackKey());
 
         // Set URL of the application under test
-        caps.setCapability("app", "bs://c700ce60cf13ae8ed97705a55b8e022f13c5827c");
-        //caps.setCapability("app", browserstackConfig.app());
+        //caps.setCapability("app", "bs://c700ce60cf13ae8ed97705a55b8e022f13c5827c");
+        caps.setCapability("app", browserstackConfig.app());
 
         // Specify device and os_version for testing
-        caps.setCapability("device", "Google Pixel 3");
-        //caps.setCapability("deviceName", browserstackConfig.device());
-        caps.setCapability("os_version", "9.0");
-        //caps.setCapability("platformVersion", browserstackConfig.osVersion());
+        //caps.setCapability("device", "Google Pixel 3");
+        caps.setCapability("device", browserstackConfig.device());
+        //caps.setCapability("os_version", "9.0");
+        caps.setCapability("os_version", browserstackConfig.osVersion());
 
         // Set other BrowserStack capabilities
-        caps.setCapability("project", "First Java Project");
-        //caps.setCapability("projectName", browserstackConfig.project());
-        caps.setCapability("build", "browserstack-build-1");
-        //caps.setCapability("buildName", browserstackConfig.build());
-        caps.setCapability("name", "first_test");
-        //caps.setCapability("sessionName", browserstackConfig.name());
+        //caps.setCapability("project", "First Java Project");
+        caps.setCapability("project", browserstackConfig.project());
+        //caps.setCapability("build", "browserstack-build-1");
+        caps.setCapability("build", browserstackConfig.build());
+        //caps.setCapability("name", "first_test");
+        caps.setCapability("name", browserstackConfig.name());
 
-        // Initialise the remote Webdriver using BrowserStack remote URL
+        // Initialise the remote WebDriver using BrowserStack remote URL
         // and desired capabilities defined above
         try {
             return new RemoteWebDriver(
-                    new URL("https://hub.browserstack.com/wd/hub"), caps);
-                    //new URL(browserstackConfig.remote()), caps);
+                    //new URL("https://hub.browserstack.com/wd/hub"), caps);
+                    new URL(browserstackConfig.remote()), caps);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }

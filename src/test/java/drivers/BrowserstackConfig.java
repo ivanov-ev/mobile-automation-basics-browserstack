@@ -11,24 +11,24 @@ public interface BrowserstackConfig extends Config {
     @Key("browserstack.key")
     String browserstackKey();
 
-    @Key("app")
+    //@Key("app")
     String app();
 
-    @Key("device")
+    //@Key("device")
     String device();
 
     @Key("os_version")
     String osVersion();
 
-    @Key("project")
+    //@Key("project")
     String project();
 
-    @Key("build")
+    //@Key("build")
     String build();
 
-    @Key("name")
+    //@Key("name")
     String name();
 
-    @Key("remote")
+    //@Key("remote")
     String remote();
 }

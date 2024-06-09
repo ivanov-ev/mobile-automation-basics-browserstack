@@ -16,9 +16,10 @@ import static com.codeborne.selenide.Selenide.open;
 public class TestBase {
     @BeforeAll
     static void beforeAll() {
+        System.setProperty("env", System.getProperty("env", "android"));// Run tests on Android if not defined
         Configuration.browser = BrowserstackDriver.class.getName();
         Configuration.browserSize = null;
-        Configuration.timeout = 30000;
+        Configuration.timeout = 15000;//Recommended value is 30000
     }
 
     @BeforeEach
