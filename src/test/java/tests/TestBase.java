@@ -5,6 +5,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import drivers.BrowserstackDriver;
 import helpers.Attach;
+import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,6 +16,7 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class TestBase {
     @BeforeAll
+    @Step("Init step")
     static void beforeAll() {
         System.setProperty("env", System.getProperty("env", "android"));// Run tests on Android if not defined
         Configuration.browser = BrowserstackDriver.class.getName();
@@ -23,6 +25,7 @@ public class TestBase {
     }
 
     @BeforeEach
+    @Step("Add listener")
     void beforeEach() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         open();
@@ -33,9 +36,9 @@ public class TestBase {
         String sessionId = Selenide.sessionId().toString();
         System.out.println(sessionId);
 
-//        Attach.screenshotAs("Last screenshot"); // todo fix
+        Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         closeWebDriver();
-        //Attach.addVideo(sessionId);
+        Attach.addVideo(sessionId);
     }
 }

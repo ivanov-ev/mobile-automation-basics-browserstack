@@ -5,14 +5,23 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class Attach {
     @Attachment(value = "{attachName}", type = "image/png")
     public static byte[] screenshotAs(String attachName) {
-        return ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
+        String base64 = ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BASE64);
+        base64 = base64.replaceAll("[\n\r]", "");
+        return Base64.getDecoder().decode(base64);
     }
+    //Or use the below code if screenshots are not base64:
+    /*
+        public static byte[] screenshotAs(String attachName) {
+            return ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
+        }
+     */
 
     @Attachment(value = "Page source", type = "text/plain")
     public static byte[] pageSource() {
