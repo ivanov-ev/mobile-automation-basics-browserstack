@@ -18,10 +18,10 @@ public class TestBase {
     @BeforeAll
     @Step("Init step")
     static void beforeAll() {
-        System.setProperty("env", System.getProperty("env", "android"));// Run tests on Android if not defined
+        System.setProperty("env", System.getProperty("env", "android"));
         Configuration.browser = BrowserstackDriver.class.getName();
         Configuration.browserSize = null;
-        Configuration.timeout = 15000;//Recommended value is 30000
+        Configuration.timeout = 15000;//30000 is recommended; I shortened it to reduce the time spent on Browserstack
     }
 
     @BeforeEach

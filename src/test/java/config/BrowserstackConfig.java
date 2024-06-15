@@ -1,4 +1,4 @@
-package drivers;
+package config;
 
 import org.aeonbits.owner.Config;
 
@@ -24,5 +24,6 @@ public interface BrowserstackConfig extends Config {
 
     String name();
 
+    @Key("base_url")
     String remote();
 }

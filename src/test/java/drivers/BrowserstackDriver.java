@@ -1,11 +1,11 @@
 package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
+import config.BrowserstackConfig;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import javax.annotation.Nonnull;
@@ -14,12 +14,23 @@ import java.net.URL;
 
 public class BrowserstackDriver implements WebDriverProvider {
 
-    public static BrowserstackConfig browserstackConfig = ConfigFactory.create(BrowserstackConfig.class, System.getProperties());
+    BrowserstackConfig browserstackConfig = ConfigFactory.create(BrowserstackConfig.class);
 
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
         MutableCapabilities caps = new MutableCapabilities();
+
+        System.out.println("Debug info for fixing errors in configuration or when the '-Denv' variable cannot be read:");
+        System.out.println("browserstackUser" + browserstackConfig.browserstackUser());
+        System.out.println("browserstackKey" + browserstackConfig.browserstackKey());
+        System.out.println("app" + browserstackConfig.app());
+        System.out.println("device" + browserstackConfig.device());
+        System.out.println("osVersion" + browserstackConfig.osVersion());
+        System.out.println("project" + browserstackConfig.project());
+        System.out.println("build" + browserstackConfig.build());
+        System.out.println("name" + browserstackConfig.name());
+        System.out.println("remote" + browserstackConfig.remote());
 
         // Set your access credentials
         caps.setCapability("browserstack.user", browserstackConfig.browserstackUser());
@@ -41,7 +52,7 @@ public class BrowserstackDriver implements WebDriverProvider {
         // and desired capabilities defined above
         try {
             return new RemoteWebDriver(
-                    new URL(browserstackConfig.remote()), caps);
+                   new URL(browserstackConfig.remote()), caps);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
