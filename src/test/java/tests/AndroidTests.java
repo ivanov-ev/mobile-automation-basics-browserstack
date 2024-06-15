@@ -12,9 +12,12 @@ import static io.qameta.allure.Allure.step;
 
 public class AndroidTests extends TestBase {
 
+    //The Wikipedia app is the default demo app for Android on Browserstack. It's always there.
+    //So there is no need to upload it manually.
+
     @Test
     @Tag("android")
-    @DisplayName("Android: Type a request and check the suggestions' drop-down menu is not blank")
+    @DisplayName("Android: Wikipedia: Type a request and check the suggestions' drop-down menu is not blank")
     void successfulSearchTest() {
         step("Type search", () -> {
             $(accessibilityId("Search Wikipedia")).click();//org.wikipedia.alpha:id/search_container
@@ -27,7 +30,7 @@ public class AndroidTests extends TestBase {
 
     @Test
     @Tag("android")
-    @DisplayName("Android: Type a request anf check an image is present in the the suggestions' drop-down menu")
+    @DisplayName("Android: Wikipedia: Type a request anf check an image is present in the the suggestions' drop-down menu")
     void successfulSearchAndOpenArticleAndroidTest() {
         step("Type search", () -> {
             $(accessibilityId("Search Wikipedia")).click();

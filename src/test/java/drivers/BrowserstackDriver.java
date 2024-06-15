@@ -22,15 +22,15 @@ public class BrowserstackDriver implements WebDriverProvider {
         MutableCapabilities caps = new MutableCapabilities();
 
         System.out.println("Debug info for fixing errors in configuration or when the '-Denv' variable cannot be read:");
-        System.out.println("browserstackUser" + browserstackConfig.browserstackUser());
-        System.out.println("browserstackKey" + browserstackConfig.browserstackKey());
-        System.out.println("app" + browserstackConfig.app());
-        System.out.println("device" + browserstackConfig.device());
-        System.out.println("osVersion" + browserstackConfig.osVersion());
-        System.out.println("project" + browserstackConfig.project());
-        System.out.println("build" + browserstackConfig.build());
-        System.out.println("name" + browserstackConfig.name());
-        System.out.println("remote" + browserstackConfig.remote());
+        System.out.println("browserstackUser = " + browserstackConfig.browserstackUser());
+        System.out.println("browserstackKey = " + browserstackConfig.browserstackKey());
+        System.out.println("app = " + browserstackConfig.app());
+        System.out.println("device = " + browserstackConfig.device());
+        System.out.println("osVersion = " + browserstackConfig.osVersion());
+        System.out.println("project = " + browserstackConfig.project());
+        System.out.println("build = " + browserstackConfig.build());
+        System.out.println("name = " + browserstackConfig.name());
+        System.out.println("remote = " + browserstackConfig.remote());
 
         // Set your access credentials
         caps.setCapability("browserstack.user", browserstackConfig.browserstackUser());
