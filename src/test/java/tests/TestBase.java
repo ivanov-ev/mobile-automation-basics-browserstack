@@ -20,15 +20,15 @@ public class TestBase {
     static void beforeAll() {
         System.setProperty("env", System.getProperty("env", "android"));
         Configuration.browser = BrowserstackDriver.class.getName();
-        Configuration.browserSize = null;
+        Configuration.browserSize = null;//this is a Selenide workaround; 'null' means 'testing an app, not a browser page'
         Configuration.timeout = 15000;//30000 is recommended; I shortened it to reduce the time spent on Browserstack
     }
 
     @BeforeEach
     @Step("Add listener")
     void beforeEach() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-        open();
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());//Adds logging
+        open();//Yet another Selenide workaround. It means 'one should open the app first before testing it'
     }
 
     @AfterEach
